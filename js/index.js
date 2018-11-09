@@ -1,21 +1,24 @@
 'use strict'
+var params ={
+    paper: 'document.querySelector("#paper")',
+    rock: 'document.querySelector("#rock")',
+    scissors: 'document.querySelector("#scissors")',
+    output: 'document.querySelector("#output")',
+    random: 'Math.floor(Math.random()*3) + 1',
+    score: 'document.querySelector("#score")',
+    humanScore: '0',
+    computerScore: '0',
+    game: 'document.querySelector("#new-game")',
+    question: '10',
+    roundNumber: 'document.querySelector("#r-number")',
+    winner: 'Math.floor(question*50/100 +1)',
+    gameResult: 'document.querySelector("#g-result")',
+    circleButton: 'document.querySelectorAll(".circle-btn")',
+    playerPick: [], // 1-rock, 2-paper, 3-scissors
+    //computerMove: 1-paper, 2-rock, 3-scissors
+}
 
-var paper = document.querySelector('#paper');
-var rock = document.querySelector('#rock');
-var scissors = document.querySelector('#scissors');
-var output = document.querySelector('#output');
-var random = Math.floor(Math.random()*3) + 1;
-var score = document.querySelector('#score');
-var humanScore = 0;
-var computerScore = 0;
-var game = document.querySelector('#new-game');
-var question = 10;
-var roundNumber = document.querySelector('#r-number');
-var winner = Math.floor(question*50/100 +1);
-var gameResult = document.querySelector('#g-result');
-var isFinished = false;
-var circleButton = document.querySelectorAll('.circle-btn')
-
+/*
 //PAPER Click function ------------------------------ 
 
   paper.addEventListener('click', function(event){
@@ -129,33 +132,159 @@ var circleButton = document.querySelectorAll('.circle-btn')
           output.innerHTML='<h4>DRAW. You played SCISSORS, computer played SCISSORS</h4>';
       }     
   });
+ */
+
+function startGame(){
+    var buttonList = document.querySelectorAll('.player-move');   
+    
+    for (let i=0; i < buttonList.length; i ++ ) {
+        const buttonName = buttonList[i].getAttribute('data-move');
+
+        buttonList[i].addEventListener('click', function() {
+            playerMove(buttonName);
+            //console.log('abc', playerMove(name));
+        }    
+        );
+
+    }
+} 
+
+startGame();
 
 
-//NEW GAME
+var computerMove = function(){
+    var random = Math.floor(Math.random()*3) + 1;
+    if(random == 1) {
+        return 'paper';
+    } 
+    else if (random == 2) {
+        return 'rock';
+    }
+    else {
+        return 'scissors';
+    }   
+}
 
-game.addEventListener('click', function(){
-  resetGame()
-  question = window.prompt('How many round would you like to play?');
-  if (isNaN(question)|| question.length < 1) {
-      roundNumber.innerHTML='Please, write a number'
-  }
-  else {
-      winner = Math.floor(question*50/100 +1);
-      roundNumber.innerHTML = 'Number of round: ' + question + '  -   you will be a winner if you win ' + winner + ' rounds';
-  };  
-}); 
+
+
+
+function playerMove(name){
+    console.log('playermove',name);
+    computerMove();
+    console.log(computerMove());
+    if ((name === 'rock' && computerMove ==='paper')||
+        (name === 'paper' && computerMove==='scissors')||
+        (name === 'scissors' && computerMove==='rock')){
+        params.computerScore ++;
+        params.score.innerHTML = params.humanScore + ' - ' + params.computerScore; 
+        //showPick();  
+    }
+    else if ((name ==='rock' && computerMove === 'scissors')||
+              (name === 'scissors' && computerMove === 'paper')||
+              (name === 'paper' && computerMove === 'rock')) {
+               params.humanScore ++;
+               params.score.innerHTML = params.humanScore + ' - ' + params.computerScore;    
+              //showPick();
+            }
+    else {
+        //showPick();
+    }
+}
+
+function endRound(){
+    if (params.humanScore == params.winner) {
+            params.gameResult.innerHTML = 'GAME OVER  - you won';
+            for (var i=0; i< params.circleButton.length; i ++) {
+            params.circleButton[i].classList.add('circle');
+            }
+        }
+    else if (params.computerScore == params.winner){
+            params.gameResult.innerHTML = 'GAME OVER - computer won'; 
+            for (var i=0; i< params.circleButton.length; i ++) {
+                params.circleButton[i].classList.add('circle');
+            }
+    }
+    else {
+        return;
+    }
+}
+
+
+//function showPick(){
+    var computerPick = computerMove;
+    //var humanPick = 
+
+    console.log('abcde', playerMove(name));
+    // 
+//}
+
+playerMove(name)
+// function playerMove(event){
+//     random = Math.floor(Math.random()*3) + 1;
+//     if (random==1){
+//         output.innerHTML='<h4>YOU WON. You played SCISSORS, computer played PAPER</h4>';
+//         humanScore++;
+//         score.innerHTML= humanScore + ' - ' + computerScore;
+//         if (humanScore == winner) {
+//             gameResult.innerHTML= 'GAME OVER  - you won';
+//             for (var i=0; i< circleButton.length; i ++) {
+//                 circleButton[i].classList.add('circle');
+//              }
+//           }
+//           else {
+//                return; 
+//            } 
+      
+//     }
+//       else if (random==2){
+//         output.innerHTML='<h4>COMPUTER WON. You played SCISSORS, computer played ROCK</h4>';
+//         computerScore++;
+//          score.innerHTML= humanScore + ' - ' + computerScore;
+//           if (computerScore == winner) {
+//               gameResult.innerHTML= 'GAME OVER  - computer won';
+//               for (var i=0; i< circleButton.length; i ++) {
+//                 circleButton[i].classList.add('circle');
+//               }
+//           }
+//           else {
+//                return; 
+//            }      
+//       }
+//       else {
+//           output.innerHTML='<h4>DRAW. You played SCISSORS, computer played SCISSORS</h4>';
+//       }     
+//   }
+
+
+// //NEW GAME
+
+console.log(params.game);
+
+   params[game].addEventListener('click', function(){
+   resetGame();
+   params.question = window.prompt('How many round would you like to play?');
+   if (isNaN(params.question)|| params.question.length < 1) {
+       params.roundNumber.innerHTML = 'Please, write a number';
+   }
+   else {
+       params.winner = Math.floor(params.question*50/100 +1);
+       params.roundNumber.innerHTML = 'Number of round: ' + params.question + '  -   you will be a winner if you win ' + params.winner + ' rounds';
+   } 
+ }); 
+
+
 
 //RESET GAME
 
-function resetGame(){
-  humanScore = 0
-  computerScore = 0
-  score.innerHTML= humanScore + ' - ' + computerScore;
-  gameResult.innerHTML= '';
-  for (var i=0; i<circleButton.length; i ++){
-            circleButton[i].classList.remove('circle');
-      }
-}; 
+ function resetGame(){
+   params.humanScore = 0;
+   params.computerScore = 0;
+   params.score.innerHTML= params.humanScore + ' - ' + params.computerScore;
+   params.gameResult.innerHTML= '';
+   for (var i=0; i<params.circleButton.length; i ++){
+             params.circleButton[i].classList.remove('circle');
+       }
+ }; 
 
 
 
