@@ -1,19 +1,19 @@
 'use strict'
 var params ={
-    paper: 'document.querySelector("#paper")',
-    rock: 'document.querySelector("#rock")',
-    scissors: 'document.querySelector("#scissors")',
-    output: 'document.querySelector("#output")',
-    random: 'Math.floor(Math.random()*3) + 1',
-    score: 'document.querySelector("#score")',
-    humanScore: '0',
-    computerScore: '0',
-    game: 'document.querySelector("#new-game")',
-    question: '10',
-    roundNumber: 'document.querySelector("#r-number")',
-    winner: 'Math.floor(question*50/100 +1)',
-    gameResult: 'document.querySelector("#g-result")',
-    circleButton: 'document.querySelectorAll(".circle-btn")',
+    paper: document.querySelector("#paper"),
+    rock: document.querySelector("#rock"),
+    scissors: document.querySelector("#scissors"),
+    output: document.querySelector("#output"),
+    random: Math.floor(Math.random()*3) + 1,
+    score: document.querySelector("#score"),
+    humanScore: 0,
+    computerScore: 0,
+    game: document.querySelector("#new-game"),
+    question: 10,
+    roundNumber: document.querySelector("#r-number"),
+    //winner: Math.floor(question*50/100 +1),
+    gameResult: document.querySelector("#g-result"),
+    circleButton: document.querySelectorAll(".circle-btn"),
     playerPick: [], // 1-rock, 2-paper, 3-scissors
     //computerMove: 1-paper, 2-rock, 3-scissors
 }
@@ -177,7 +177,8 @@ function playerMove(name){
         (name === 'scissors' && computerMove==='rock')){
         params.computerScore ++;
         params.score.innerHTML = params.humanScore + ' - ' + params.computerScore; 
-        //showPick();  
+        //showPick(); 
+        endRound(); 
     }
     else if ((name ==='rock' && computerMove === 'scissors')||
               (name === 'scissors' && computerMove === 'paper')||
@@ -185,6 +186,7 @@ function playerMove(name){
                params.humanScore ++;
                params.score.innerHTML = params.humanScore + ' - ' + params.computerScore;    
               //showPick();
+              endRound();
             }
     else {
         //showPick();
@@ -215,52 +217,13 @@ function endRound(){
     //var humanPick = 
 
     console.log('abcde', playerMove(name));
-    // 
-//}
-
-playerMove(name)
-// function playerMove(event){
-//     random = Math.floor(Math.random()*3) + 1;
-//     if (random==1){
-//         output.innerHTML='<h4>YOU WON. You played SCISSORS, computer played PAPER</h4>';
-//         humanScore++;
-//         score.innerHTML= humanScore + ' - ' + computerScore;
-//         if (humanScore == winner) {
-//             gameResult.innerHTML= 'GAME OVER  - you won';
-//             for (var i=0; i< circleButton.length; i ++) {
-//                 circleButton[i].classList.add('circle');
-//              }
-//           }
-//           else {
-//                return; 
-//            } 
-      
-//     }
-//       else if (random==2){
-//         output.innerHTML='<h4>COMPUTER WON. You played SCISSORS, computer played ROCK</h4>';
-//         computerScore++;
-//          score.innerHTML= humanScore + ' - ' + computerScore;
-//           if (computerScore == winner) {
-//               gameResult.innerHTML= 'GAME OVER  - computer won';
-//               for (var i=0; i< circleButton.length; i ++) {
-//                 circleButton[i].classList.add('circle');
-//               }
-//           }
-//           else {
-//                return; 
-//            }      
-//       }
-//       else {
-//           output.innerHTML='<h4>DRAW. You played SCISSORS, computer played SCISSORS</h4>';
-//       }     
-//   }
 
 
 // //NEW GAME
 
 console.log(params.game);
 
-   params[game].addEventListener('click', function(){
+   params.game.addEventListener('click', function(){
    resetGame();
    params.question = window.prompt('How many round would you like to play?');
    if (isNaN(params.question)|| params.question.length < 1) {
