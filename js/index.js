@@ -163,7 +163,7 @@ var computerMove = function(){
     else {
         return 'scissors';
     }   
-}
+};
 
 
 
@@ -171,25 +171,27 @@ var computerMove = function(){
 function playerMove(name){
     console.log('playermove',name);
     computerMove();
-    console.log(computerMove());
+    console.log('computermove',computerMove());
     if ((name === 'rock' && computerMove ==='paper')||
         (name === 'paper' && computerMove==='scissors')||
         (name === 'scissors' && computerMove==='rock')){
-        params.computerScore ++;
+        params.computerScore++;
         params.score.innerHTML = params.humanScore + ' - ' + params.computerScore; 
-        //showPick(); 
+        console.log('twoje punkty', params.humanScore); 
+        console.log('punkty komputera', params.computerScore);
+        params.output.inneHTML = 'COMPUTER WON. You played ' + name + ', computer played ' + computerMove();
         endRound(); 
     }
     else if ((name ==='rock' && computerMove === 'scissors')||
-              (name === 'scissors' && computerMove === 'paper')||
-              (name === 'paper' && computerMove === 'rock')) {
-               params.humanScore ++;
-               params.score.innerHTML = params.humanScore + ' - ' + params.computerScore;    
-              //showPick();
-              endRound();
+            (name === 'scissors' && computerMove === 'paper')||
+            (name === 'paper' && computerMove === 'rock')) {
+            params.humanScore++;
+            params.score.innerHTML = params.humanScore + ' - ' + params.computerScore;    
+            params.output.inneHTML = 'YOU WON. You played ' + name + ', computer played ' + computerMove();
+            endRound();
             }
     else {
-        //showPick();
+            params.output.innerHTML = 'DRAW. You played ' + name + ', computer played ' + computerMove();
     }
 }
 
@@ -203,7 +205,7 @@ function endRound(){
     else if (params.computerScore == params.winner){
             params.gameResult.innerHTML = 'GAME OVER - computer won'; 
             for (var i=0; i< params.circleButton.length; i ++) {
-                params.circleButton[i].classList.add('circle');
+            params.circleButton[i].classList.add('circle');
             }
     }
     else {
@@ -211,15 +213,7 @@ function endRound(){
     }
 }
 
-
-//function showPick(){
-    var computerPick = computerMove;
-    //var humanPick = 
-
-    console.log('abcde', playerMove(name));
-
-
-// //NEW GAME
+//NEW GAME
 
 console.log(params.game);
 
@@ -247,7 +241,7 @@ console.log(params.game);
    for (var i=0; i<params.circleButton.length; i ++){
              params.circleButton[i].classList.remove('circle');
        }
- }; 
+ }
 
 
 
