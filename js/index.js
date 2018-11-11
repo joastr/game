@@ -1,4 +1,4 @@
-'use strict'
+'use strict';
 var params ={
     paper: document.querySelector("#paper"),
     rock: document.querySelector("#rock"),
@@ -166,15 +166,13 @@ var computerMove = function(){
 };
 
 
-
-
 function playerMove(name){
     console.log('playermove',name);
-    computerMove();
+    var computerM = computerMove();
     console.log('computermove',computerMove());
-    if ((name === 'rock' && computerMove ==='paper')||
-        (name === 'paper' && computerMove==='scissors')||
-        (name === 'scissors' && computerMove==='rock')){
+    if ((name === 'rock' && computerM ==='paper')||
+        (name === 'paper' && computerM==='scissors')||
+        (name === 'scissors' && computerM==='rock')){
         params.computerScore++;
         params.score.innerHTML = params.humanScore + ' - ' + params.computerScore; 
         console.log('twoje punkty', params.humanScore); 
@@ -182,9 +180,9 @@ function playerMove(name){
         params.output.inneHTML = 'COMPUTER WON. You played ' + name + ', computer played ' + computerMove();
         endRound(); 
     }
-    else if ((name ==='rock' && computerMove === 'scissors')||
-            (name === 'scissors' && computerMove === 'paper')||
-            (name === 'paper' && computerMove === 'rock')) {
+    else if ((name ==='rock' && computerM === 'scissors')||
+            (name === 'scissors' && computerM === 'paper')||
+            (name === 'paper' && computerM === 'rock')) {
             params.humanScore++;
             params.score.innerHTML = params.humanScore + ' - ' + params.computerScore;    
             params.output.inneHTML = 'YOU WON. You played ' + name + ', computer played ' + computerMove();
@@ -195,22 +193,69 @@ function playerMove(name){
     }
 }
 
+
+/*SHOW MODAL 
+function showModal() {
+var allModals = document.querySelectorAll('.modal');
+	    	for (var i = 0; i < allModals.length; i++) {
+	          allModals[i].classList.remove('show');
+	    	}
+		document.querySelector('#modal-one').classList.add('show');
+		document.querySelector('#modal-overlay').classList.add('show');
+}
+*/
+
+
+//END ROUND
 function endRound(){
+    
+    // display text  
     if (params.humanScore == params.winner) {
             params.gameResult.innerHTML = 'GAME OVER  - you won';
             for (var i=0; i< params.circleButton.length; i ++) {
             params.circleButton[i].classList.add('circle');
+            showModal ();
             }
         }
     else if (params.computerScore == params.winner){
             params.gameResult.innerHTML = 'GAME OVER - computer won'; 
             for (var i=0; i< params.circleButton.length; i ++) {
             params.circleButton[i].classList.add('circle');
+            showModal();
             }
-    }
+        }
     else {
         return;
     }
+
+    //hide modal 
+    var hideModal = function(event){
+		event.preventDefault();
+        document.querySelector('#modal-overlay').classList.remove('show');
+        document.querySelector('#modal-one').classList.remove('show');
+	};
+	
+    var closeButtons = document.querySelectorAll('.close');
+    console.log('x-button-modal', closeButtons);  
+	
+	for(var i = 0; i < closeButtons.length; i++){
+		closeButtons[i].addEventListener('click', hideModal);
+    }
+    // hide modal by click overlay
+
+    document.querySelector('#modal-overlay').addEventListener('click', hideModal);
+
+    //stop propagation
+
+    var modals = document.querySelectorAll('.modal');
+	
+	for(var i = 0; i < modals.length; i++){
+		modals[i].addEventListener('click', function(event){
+			event.stopPropagation();
+		});
+	}
+
+
 }
 
 //NEW GAME

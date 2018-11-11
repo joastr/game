@@ -65,9 +65,9 @@ button{
   
 }
 
-.hidden {
+/*.hidden {
   display: none;
-}
+}*/
 
 #new-game {
     background: $limon;
@@ -78,7 +78,57 @@ button{
     color: #444444;
  }
 
-#freddy img {
-  width: 200px;
+ /*MODAL*/
+
+ .overlay {
+	display: none;
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background: rgba(0, 0, 0, 0.7);
+	
+	&.show {
+		display: block;
+	}
 }
+
+.modal {
+    background: $viking;
+    display: none;
+    width: 250px;
+    height: 50px;
+    padding: 20px;
+    line-height: 50px;
+    border-radius: 10px;
+    color: black;
+    font-size: 1.2em;
+    position: absolute;
+    top: 40%;
+    left: 30%;
+    -webkit-transform: translate3d(-50%, -50%, 0);
+    transform: translate3d(-50%, -50%, 0);
+    border-width: 2px;
+    border-style: outset;
+    border-color: buttonface;
+    border-image: initial;
+    font-weight:900;
+
+	&.show {
+    display: block;
+   
+	}
+	
+	.close {
+		position: absolute;
+		right: 0;
+		top: -20px;
+		padding: 5px;
+		color: #000;
+    text-decoration: none;
+    font-size: 0.8em;
+  } 
+}
+
 
