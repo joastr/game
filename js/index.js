@@ -194,7 +194,7 @@ function playerMove(name){
 }
 
 
-/*SHOW MODAL 
+//SHOW MODAL 
 function showModal() {
 var allModals = document.querySelectorAll('.modal');
 	    	for (var i = 0; i < allModals.length; i++) {
@@ -203,7 +203,33 @@ var allModals = document.querySelectorAll('.modal');
 		document.querySelector('#modal-one').classList.add('show');
 		document.querySelector('#modal-overlay').classList.add('show');
 }
-*/
+
+//HIDE MODAL 
+
+ var hideModal = function(event){
+    event.preventDefault();
+    document.querySelector('#modal-overlay').classList.remove('show');
+    document.querySelector('#modal-one').classList.remove('show');
+};
+
+var closeButtons = document.querySelectorAll('.close');
+console.log('x-button-modal', closeButtons);  
+
+for(var i = 0; i < closeButtons.length; i++){
+    closeButtons[i].addEventListener('click', hideModal);
+}
+// hide modal by click overlay
+
+document.querySelector('#modal-overlay').addEventListener('click', hideModal);
+
+//stop propagation
+
+var modals = document.querySelectorAll('.modal');
+
+for(var i = 0; i < modals.length; i++){
+    modals[i].addEventListener('click', function(event){
+        event.stopPropagation();
+    });
 
 
 //END ROUND
@@ -228,34 +254,8 @@ function endRound(){
         return;
     }
 
-    //hide modal 
-    var hideModal = function(event){
-		event.preventDefault();
-        document.querySelector('#modal-overlay').classList.remove('show');
-        document.querySelector('#modal-one').classList.remove('show');
-	};
-	
-    var closeButtons = document.querySelectorAll('.close');
-    console.log('x-button-modal', closeButtons);  
-	
-	for(var i = 0; i < closeButtons.length; i++){
-		closeButtons[i].addEventListener('click', hideModal);
-    }
-    // hide modal by click overlay
-
-    document.querySelector('#modal-overlay').addEventListener('click', hideModal);
-
-    //stop propagation
-
-    var modals = document.querySelectorAll('.modal');
-	
-	for(var i = 0; i < modals.length; i++){
-		modals[i].addEventListener('click', function(event){
-			event.stopPropagation();
-		});
+   
 	}
-
-
 }
 
 //NEW GAME
