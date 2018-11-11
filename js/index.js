@@ -14,7 +14,7 @@ var params ={
     //winner: Math.floor(question*50/100 +1),
     gameResult: document.querySelector("#g-result"),
     circleButton: document.querySelectorAll(".circle-btn"),
-    playerPick: [], // 1-rock, 2-paper, 3-scissors
+    //progress: [], 
     //computerMove: 1-paper, 2-rock, 3-scissors
 }
 
@@ -177,7 +177,7 @@ function playerMove(name){
         params.score.innerHTML = params.humanScore + ' - ' + params.computerScore; 
         console.log('twoje punkty', params.humanScore); 
         console.log('punkty komputera', params.computerScore);
-        params.output.inneHTML = 'COMPUTER WON. You played ' + name + ', computer played ' + computerMove();
+        params.output.innerHTML = 'COMPUTER WON. You played ' + name + ', computer played ' + computerMove();
         endRound(); 
     }
     else if ((name ==='rock' && computerM === 'scissors')||
@@ -185,7 +185,7 @@ function playerMove(name){
             (name === 'paper' && computerM === 'rock')) {
             params.humanScore++;
             params.score.innerHTML = params.humanScore + ' - ' + params.computerScore;    
-            params.output.inneHTML = 'YOU WON. You played ' + name + ', computer played ' + computerMove();
+            params.output.innerHTML = 'YOU WON. You played ' + name + ', computer played ' + computerMove();
             endRound();
             }
     else {
@@ -201,14 +201,14 @@ var allModals = document.querySelectorAll('.modal');
 	          allModals[i].classList.remove('show');
 	    	}
 		document.querySelector('#modal-one').classList.add('show');
-		document.querySelector('#modal-overlay').classList.add('show');
+		//document.querySelector('#modal-overlay').classList.add('show');
 }
 
 //HIDE MODAL 
 
  var hideModal = function(event){
     event.preventDefault();
-    document.querySelector('#modal-overlay').classList.remove('show');
+    //document.querySelector('#modal-overlay').classList.remove('show');
     document.querySelector('#modal-one').classList.remove('show');
 };
 
@@ -218,11 +218,8 @@ console.log('x-button-modal', closeButtons);
 for(var i = 0; i < closeButtons.length; i++){
     closeButtons[i].addEventListener('click', hideModal);
 }
-// hide modal by click overlay
 
-document.querySelector('#modal-overlay').addEventListener('click', hideModal);
-
-//stop propagation
+/*stop propagation
 
 var modals = document.querySelectorAll('.modal');
 
@@ -230,7 +227,8 @@ for(var i = 0; i < modals.length; i++){
     modals[i].addEventListener('click', function(event){
         event.stopPropagation();
     });
-
+}
+*/
 
 //END ROUND
 function endRound(){
@@ -252,11 +250,9 @@ function endRound(){
         }
     else {
         return;
-    }
-
-   
-	}
+    }   
 }
+
 
 //NEW GAME
 
