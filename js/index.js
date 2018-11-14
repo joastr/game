@@ -275,10 +275,10 @@ for(var i = 0; i < modals.length; i++){
 function createModalTable () {
     params.gameResult.innerHTML += '<table><tr><th>Round Number</th><th>Your Move</th><th>Computer Move</th><th>Result</th><th>Score</th></tr></table>';
     for(var g=0; g<params.eachRound.length; g++){
-        params.gameResult.innerHTML +=params.progress[g].round-nb;
-        params.gameResult.innerHTML += params.progress[g].computer-move;
-        params.gameResult.innerHTML += params.progress[g].player-move;
-        console.log('sprawdzenie progress', params.progress[g].player-move);
+        params.gameResult.innerHTML +=params.progress[g]['round-nb:'];
+        params.gameResult.innerHTML += params.progress[g]['computer-move:'];
+        params.gameResult.innerHTML += params.progress[g]['player-move:'];
+        console.log('sprawdzenie progress', params.progress[g]['player-move:']);
     }
     
 }
