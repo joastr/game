@@ -14,9 +14,20 @@ var params ={
     //winner: Math.floor(question*50/100 +1),
     gameResult: document.querySelector("#g-result"),
     circleButton: document.querySelectorAll(".circle-btn"),
-    //progress: [], 
+    progress: [], 
+    eachRound: 0,
+    table: document.querySelector("table"),
     //computerMove: 1-paper, 2-rock, 3-scissors
 }
+ 
+    //params.progress.push({słoma:'siano', pies: 'kot', computerM});
+    //params.progress.push({biały: 'czarny'})
+    console.log('progress', params.progress);
+    //console.log('dane z progress',params.progress[0].computerMove)
+    //console.log('dane', params.progress[słoma])
+    //console.log('dane', params.progress.values(biały))
+    
+    
 
 /*
 //PAPER Click function ------------------------------ 
@@ -174,22 +185,51 @@ function playerMove(name){
         (name === 'paper' && computerM==='scissors')||
         (name === 'scissors' && computerM==='rock')){
         params.computerScore++;
+        params.eachRound ++;
+            console.log('nr rundy',params.eachRound);
+        /*    for (i=0; i < params.eachRound.length; i ++) {
+                var tableRow = document.createElement("tr");
+                params.table.appendChild(tableRow); 
+                tableRow.innerHTML='<td>params.eachRound</td><td>name</td><td>computerM</td><td>Computer Won</td><td>params.humanScore - params.computerScore </td>';
+        }*/
+        params.progress.push({'round-nb:': params.eachRound, 'computer-move:': computerM, 'player-move:':name});
+            
         params.score.innerHTML = params.humanScore + ' - ' + params.computerScore; 
         console.log('twoje punkty', params.humanScore); 
         console.log('punkty komputera', params.computerScore);
         params.output.innerHTML = 'COMPUTER WON. You played ' + name + ', computer played ' + computerMove();
         endRound(); 
+        
     }
     else if ((name ==='rock' && computerM === 'scissors')||
             (name === 'scissors' && computerM === 'paper')||
             (name === 'paper' && computerM === 'rock')) {
             params.humanScore++;
+            params.eachRound++;
+            console.log('nr rundy',params.eachRound);
+            /*for (i=0; i < params.eachRound.length; i ++) {
+                var tableRow = document.createElement("tr");
+                params.table.appendChild(tableRow); 
+                tableRow.innerHTML='<td>params.eachRound</td><td>name</td><td>computerM</td><td>You Won</td><td>params.humanScore - params.computerScore </td>';
+            }*/
+            params.progress.push({'round-nb:': params.eachRound, 'computer-move:': computerM, 'player-move:':name});
             params.score.innerHTML = params.humanScore + ' - ' + params.computerScore;    
             params.output.innerHTML = 'YOU WON. You played ' + name + ', computer played ' + computerMove();
             endRound();
+            
             }
     else {
             params.output.innerHTML = 'DRAW. You played ' + name + ', computer played ' + computerMove();
+            params.eachRound++;
+            console.log('nr rundy',params.eachRound);
+            params.progress.push({'round-nb:': params.eachRound, 'computer-move:': computerM, 'player-move:':name});
+            /*for (i=0; i < params.eachRound.length; i ++) {
+                var tableRow = document.createElement("tr");
+                params.table.appendChild(tableRow); 
+                tableRow.innerHTML='<td>params.eachRound</td><td>name</td><td>computerM</td><td>Draw</td><td>0 - 0</td>';
+
+            }*/
+            
     }
 }
 
@@ -230,19 +270,35 @@ for(var i = 0; i < modals.length; i++){
 }
 */
 
+// MODAL TABLE
+
+function createModalTable () {
+    params.gameResult.innerHTML += '<table><tr><th>Round Number</th><th>Your Move</th><th>Computer Move</th><th>Result</th><th>Score</th></tr></table>';
+    for(var g=0; g<params.eachRound.length; g++){
+        params.gameResult.innerHTML +=params.progress[g].round-nb;
+        params.gameResult.innerHTML += params.progress[g].computer-move;
+        params.gameResult.innerHTML += params.progress[g].player-move;
+        console.log('sprawdzenie progress', params.progress[g].player-move);
+    }
+    
+}
+
+
 //END ROUND
 function endRound(){
     
     // display text  
     if (params.humanScore == params.winner) {
-            params.gameResult.innerHTML = 'GAME OVER  - you won';
+            params.gameResult.innerHTML = 'GAME OVER  - you won' + '<br>';
+            createModalTable();
             for (var i=0; i< params.circleButton.length; i ++) {
             params.circleButton[i].classList.add('circle');
             showModal ();
             }
         }
     else if (params.computerScore == params.winner){
-            params.gameResult.innerHTML = 'GAME OVER - computer won'; 
+            params.gameResult.innerHTML = 'GAME OVER - computer won' + '<br>'; 
+            createModalTable();
             for (var i=0; i< params.circleButton.length; i ++) {
             params.circleButton[i].classList.add('circle');
             showModal();

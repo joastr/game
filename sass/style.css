@@ -92,18 +92,15 @@ button:nth-of-type(3) {
 .modal {
   background: #4ECDC4;
   display: none;
-  width: 250px;
-  height: 50px;
+  width: 700px;
   padding: 20px;
-  line-height: 50px;
+  line-height: 1.5em;
   border-radius: 10px;
   color: black;
   font-size: 1.2em;
   position: absolute;
   top: 40%;
   left: 30%;
-  -webkit-transform: translate3d(-50%, -50%, 0);
-  transform: translate3d(-50%, -50%, 0);
   border-width: 2px;
   border-style: outset;
   border-color: buttonface;
@@ -119,10 +116,19 @@ button:nth-of-type(3) {
 .modal .close {
   position: absolute;
   right: 0;
-  top: -20px;
+  top: -10px;
   padding: 5px;
   color: #000;
   text-decoration: none;
   font-size: 0.8em;
+}
+
+.modal table {
+  font-size: 0.8em;
+  font-weight: normal;
+}
+
+.modal table th {
+  padding-right: 30px;
 }
 /*# sourceMappingURL=style.css.map */
