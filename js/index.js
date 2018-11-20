@@ -17,8 +17,9 @@ var params ={
     progress: [], 
     eachRound: 0,
     table: document.querySelector("table"),
+    face: document.querySelector('#face'),
     //computerMove: 1-paper, 2-rock, 3-scissors
-}
+};
  
     //params.progress.push({słoma:'siano', pies: 'kot', computerM});
     //params.progress.push({biały: 'czarny'})
@@ -186,15 +187,10 @@ function playerMove(name){
         (name === 'scissors' && computerM==='rock')){
         params.computerScore++;
         params.eachRound ++;
-            console.log('nr rundy',params.eachRound);
-        /*    for (i=0; i < params.eachRound.length; i ++) {
-                var tableRow = document.createElement("tr");
-                params.table.appendChild(tableRow); 
-                tableRow.innerHTML='<td>params.eachRound</td><td>name</td><td>computerM</td><td>Computer Won</td><td>params.humanScore - params.computerScore </td>';
-        }*/
-        params.progress.push({'round-nb:': params.eachRound, 'computer-move:': computerM, 'player-move:':name});
-            
+        console.log('nr rundy',params.eachRound);
         params.score.innerHTML = params.humanScore + ' - ' + params.computerScore; 
+        var computerWon = 'computer won';
+        params.progress.push({'round-nb': params.eachRound, 'computer-move': computerM, 'player-move':name, 'result': computerWon});     
         console.log('twoje punkty', params.humanScore); 
         console.log('punkty komputera', params.computerScore);
         params.output.innerHTML = 'COMPUTER WON. You played ' + name + ', computer played ' + computerMove();
@@ -207,13 +203,9 @@ function playerMove(name){
             params.humanScore++;
             params.eachRound++;
             console.log('nr rundy',params.eachRound);
-            /*for (i=0; i < params.eachRound.length; i ++) {
-                var tableRow = document.createElement("tr");
-                params.table.appendChild(tableRow); 
-                tableRow.innerHTML='<td>params.eachRound</td><td>name</td><td>computerM</td><td>You Won</td><td>params.humanScore - params.computerScore </td>';
-            }*/
-            params.progress.push({'round-nb:': params.eachRound, 'computer-move:': computerM, 'player-move:':name});
-            params.score.innerHTML = params.humanScore + ' - ' + params.computerScore;    
+            params.score.innerHTML = params.humanScore + ' - ' + params.computerScore;
+            var youWon = 'you won';
+            params.progress.push({'round-nb': params.eachRound, 'computer-move': computerM, 'player-move':name, 'result': youWon});   
             params.output.innerHTML = 'YOU WON. You played ' + name + ', computer played ' + computerMove();
             endRound();
             
@@ -222,13 +214,8 @@ function playerMove(name){
             params.output.innerHTML = 'DRAW. You played ' + name + ', computer played ' + computerMove();
             params.eachRound++;
             console.log('nr rundy',params.eachRound);
-            params.progress.push({'round-nb:': params.eachRound, 'computer-move:': computerM, 'player-move:':name});
-            /*for (i=0; i < params.eachRound.length; i ++) {
-                var tableRow = document.createElement("tr");
-                params.table.appendChild(tableRow); 
-                tableRow.innerHTML='<td>params.eachRound</td><td>name</td><td>computerM</td><td>Draw</td><td>0 - 0</td>';
-
-            }*/
+            var draw = 'draw';
+            params.progress.push({'round-nb': params.eachRound, 'computer-move': computerM, 'player-move':name, 'result': draw});
             
     }
 }
@@ -241,14 +228,13 @@ var allModals = document.querySelectorAll('.modal');
 	          allModals[i].classList.remove('show');
 	    	}
 		document.querySelector('#modal-one').classList.add('show');
-		//document.querySelector('#modal-overlay').classList.add('show');
+		
 }
 
 //HIDE MODAL 
 
  var hideModal = function(event){
     event.preventDefault();
-    //document.querySelector('#modal-overlay').classList.remove('show');
     document.querySelector('#modal-one').classList.remove('show');
 };
 
@@ -273,12 +259,14 @@ for(var i = 0; i < modals.length; i++){
 // MODAL TABLE
 
 function createModalTable () {
-    params.gameResult.innerHTML += '<table><tr><th>Round Number</th><th>Your Move</th><th>Computer Move</th><th>Result</th><th>Score</th></tr></table>';
-    for(var g=0; g<params.eachRound.length; g++){
-        params.gameResult.innerHTML +=params.progress[g]['round-nb:'];
-        params.gameResult.innerHTML += params.progress[g]['computer-move:'];
-        params.gameResult.innerHTML += params.progress[g]['player-move:'];
-        console.log('sprawdzenie progress', params.progress[g]['player-move:']);
+    //params.gameResult.innerHTML += '<table><tr><th>Round Number</th><th>Your Move</th><th>Computer Move</th><th>Result</th><th>Score</th></tr></table>';
+    for(var g=0; g<params.eachRound; g++){
+        params.gameResult.innerHTML +=' round number: '+ params.progress[g]['round-nb'] + ',   ';
+        params.gameResult.innerHTML += ' your move: ' + params.progress[g]['player-move'] + ',  ';
+        params.gameResult.innerHTML += ' computer move: ' + params.progress[g]['computer-move'] + ', ';
+        params.gameResult.innerHTML += ' result: ' + params.progress[g]['result'] + '<br>';
+        
+        console.log('sprawdzenie progress', params.progress[g]['player-move']);
     }
     
 }
@@ -289,16 +277,19 @@ function endRound(){
     
     // display text  
     if (params.humanScore == params.winner) {
-            params.gameResult.innerHTML = 'GAME OVER  - you won' + '<br>';
+            params.gameResult.innerHTML = '<span>GAME OVER  - you won</span>' + '<br>';
             createModalTable();
+            params.face.classList.toggle('freddy-smile');
+            console.log(params.face);
             for (var i=0; i< params.circleButton.length; i ++) {
             params.circleButton[i].classList.add('circle');
             showModal ();
             }
         }
     else if (params.computerScore == params.winner){
-            params.gameResult.innerHTML = 'GAME OVER - computer won' + '<br>'; 
+            params.gameResult.innerHTML = '<span>GAME OVER - computer won</span>' + '<br>'; 
             createModalTable();
+            params.face.classList.toggle('freddy-tears');
             for (var i=0; i< params.circleButton.length; i ++) {
             params.circleButton[i].classList.add('circle');
             showModal();
@@ -316,6 +307,7 @@ console.log(params.game);
 
    params.game.addEventListener('click', function(){
    resetGame();
+   params.face.classList.toggle('freddy');
    params.question = window.prompt('How many round would you like to play?');
    if (isNaN(params.question)|| params.question.length < 1) {
        params.roundNumber.innerHTML = 'Please, write a number';
@@ -334,7 +326,9 @@ console.log(params.game);
    params.humanScore = 0;
    params.computerScore = 0;
    params.score.innerHTML= params.humanScore + ' - ' + params.computerScore;
-   params.gameResult.innerHTML= '';
+   params.gameResult.innerHTML= ''; 
+   params.face.classList.add('freddy');
+   console.log('reset freddy', params.face); 
    for (var i=0; i<params.circleButton.length; i ++){
              params.circleButton[i].classList.remove('circle');
        }
