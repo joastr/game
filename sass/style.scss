@@ -28,6 +28,16 @@ body{
   padding-top: 50px;
 }
 
+.row::before,
+.row::after {
+  display: table;
+  content: '';
+} 
+
+.row::after {
+  clear: both;
+}
+
 .play, .round {
   text-align:center;
 }
@@ -77,16 +87,56 @@ button{
 .freddy {
   @extend %freddy;
   background-image: url('../photo/sleep.svg');
+  animation: sleep 7s infinite;
+  animation-timing-function: easy-out;
+  &:hover{ 
+    animation-play-state:paused;
+  }
+}
+
+@keyframes sleep {
+  0% {transform: translate(0px, 0px);}
+  25% {transform: translate(-5px, -5px);}
+  50% {transform: translate(0px, 0px);}
+  75% {transform: translate(-10px, -30px);}
+  100% {transform: translate(0px, 0px);}
 }
 
 .freddy-smile {
   @extend %freddy;
   background-image: url('../photo/smile.svg');
+  animation: smile 3s infinite;
+  animation-timing-function: easy-out;
+  &:hover{ 
+    animation-play-state:paused;
+  }
 } 
+
+@keyframes smile {
+  0% {transform: translate(0px, 0px);}
+  25% {transform: matrix(1.1, 0, 0, 1.1, -22, -55);}
+  50% {transform: translate(0px, 0px); transform: scale(1,1);}
+  75% {transform: matrix(1.1, 0, 0, 1.1, 33, -77);}
+  100% {transform: translate(0px, 0px); transform: scale(1,1);}
+}
 
 .freddy-tears {
   @extend %freddy;
   background-image: url('../photo/tears.svg');
+  animation: tears 10s infinite;
+  animation-timing-function: easy-out;
+  &:hover{ 
+    animation-play-state:paused;
+  }
+}
+
+
+@keyframes tears {
+  0% {transform: translate(0px, 0px);}
+  25% {transform: matrix(1.1, 0, 0, 1.1, -22, -55);}
+  50% {transform: translate(0px, 0px); transform: scale(1,1);}
+  75% {transform: matrix(1.1, 0, 0, 1.1, 110, -44);}
+  100% {transform: translate(0px, 0px); transform: scale(1,1);}
 }
 
 #new-game {

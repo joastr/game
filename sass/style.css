@@ -19,6 +19,16 @@ body {
   padding-top: 50px;
 }
 
+.row::before,
+.row::after {
+  display: table;
+  content: '';
+}
+
+.row::after {
+  clear: both;
+}
+
 .play, .round {
   text-align: center;
 }
@@ -72,14 +82,195 @@ button:nth-of-type(3) {
 
 .freddy {
   background-image: url("../photo/sleep.svg");
+  -webkit-animation: sleep 7s infinite;
+          animation: sleep 7s infinite;
+  -webkit-animation-timing-function: easy-out;
+          animation-timing-function: easy-out;
+}
+
+.freddy:hover {
+  -webkit-animation-play-state: paused;
+          animation-play-state: paused;
+}
+
+@-webkit-keyframes sleep {
+  0% {
+    -webkit-transform: translate(0px, 0px);
+            transform: translate(0px, 0px);
+  }
+  25% {
+    -webkit-transform: translate(-5px, -5px);
+            transform: translate(-5px, -5px);
+  }
+  50% {
+    -webkit-transform: translate(0px, 0px);
+            transform: translate(0px, 0px);
+  }
+  75% {
+    -webkit-transform: translate(-10px, -30px);
+            transform: translate(-10px, -30px);
+  }
+  100% {
+    -webkit-transform: translate(0px, 0px);
+            transform: translate(0px, 0px);
+  }
+}
+
+@keyframes sleep {
+  0% {
+    -webkit-transform: translate(0px, 0px);
+            transform: translate(0px, 0px);
+  }
+  25% {
+    -webkit-transform: translate(-5px, -5px);
+            transform: translate(-5px, -5px);
+  }
+  50% {
+    -webkit-transform: translate(0px, 0px);
+            transform: translate(0px, 0px);
+  }
+  75% {
+    -webkit-transform: translate(-10px, -30px);
+            transform: translate(-10px, -30px);
+  }
+  100% {
+    -webkit-transform: translate(0px, 0px);
+            transform: translate(0px, 0px);
+  }
 }
 
 .freddy-smile {
   background-image: url("../photo/smile.svg");
+  -webkit-animation: smile 3s infinite;
+          animation: smile 3s infinite;
+  -webkit-animation-timing-function: easy-out;
+          animation-timing-function: easy-out;
+}
+
+.freddy-smile:hover {
+  -webkit-animation-play-state: paused;
+          animation-play-state: paused;
+}
+
+@-webkit-keyframes smile {
+  0% {
+    -webkit-transform: translate(0px, 0px);
+            transform: translate(0px, 0px);
+  }
+  25% {
+    -webkit-transform: matrix(1.1, 0, 0, 1.1, -22, -55);
+            transform: matrix(1.1, 0, 0, 1.1, -22, -55);
+  }
+  50% {
+    -webkit-transform: translate(0px, 0px);
+            transform: translate(0px, 0px);
+    -webkit-transform: scale(1, 1);
+            transform: scale(1, 1);
+  }
+  75% {
+    -webkit-transform: matrix(1.1, 0, 0, 1.1, 33, -77);
+            transform: matrix(1.1, 0, 0, 1.1, 33, -77);
+  }
+  100% {
+    -webkit-transform: translate(0px, 0px);
+            transform: translate(0px, 0px);
+    -webkit-transform: scale(1, 1);
+            transform: scale(1, 1);
+  }
+}
+
+@keyframes smile {
+  0% {
+    -webkit-transform: translate(0px, 0px);
+            transform: translate(0px, 0px);
+  }
+  25% {
+    -webkit-transform: matrix(1.1, 0, 0, 1.1, -22, -55);
+            transform: matrix(1.1, 0, 0, 1.1, -22, -55);
+  }
+  50% {
+    -webkit-transform: translate(0px, 0px);
+            transform: translate(0px, 0px);
+    -webkit-transform: scale(1, 1);
+            transform: scale(1, 1);
+  }
+  75% {
+    -webkit-transform: matrix(1.1, 0, 0, 1.1, 33, -77);
+            transform: matrix(1.1, 0, 0, 1.1, 33, -77);
+  }
+  100% {
+    -webkit-transform: translate(0px, 0px);
+            transform: translate(0px, 0px);
+    -webkit-transform: scale(1, 1);
+            transform: scale(1, 1);
+  }
 }
 
 .freddy-tears {
   background-image: url("../photo/tears.svg");
+  -webkit-animation: tears 10s infinite;
+          animation: tears 10s infinite;
+  -webkit-animation-timing-function: easy-out;
+          animation-timing-function: easy-out;
+}
+
+.freddy-tears:hover {
+  -webkit-animation-play-state: paused;
+          animation-play-state: paused;
+}
+
+@-webkit-keyframes tears {
+  0% {
+    -webkit-transform: translate(0px, 0px);
+            transform: translate(0px, 0px);
+  }
+  25% {
+    -webkit-transform: matrix(1.1, 0, 0, 1.1, -22, -55);
+            transform: matrix(1.1, 0, 0, 1.1, -22, -55);
+  }
+  50% {
+    -webkit-transform: translate(0px, 0px);
+            transform: translate(0px, 0px);
+    -webkit-transform: scale(1, 1);
+            transform: scale(1, 1);
+  }
+  75% {
+    -webkit-transform: matrix(1.1, 0, 0, 1.1, 110, -44);
+            transform: matrix(1.1, 0, 0, 1.1, 110, -44);
+  }
+  100% {
+    -webkit-transform: translate(0px, 0px);
+            transform: translate(0px, 0px);
+    -webkit-transform: scale(1, 1);
+            transform: scale(1, 1);
+  }
+}
+
+@keyframes tears {
+  0% {
+    -webkit-transform: translate(0px, 0px);
+            transform: translate(0px, 0px);
+  }
+  25% {
+    -webkit-transform: matrix(1.1, 0, 0, 1.1, -22, -55);
+            transform: matrix(1.1, 0, 0, 1.1, -22, -55);
+  }
+  50% {
+    -webkit-transform: translate(0px, 0px);
+            transform: translate(0px, 0px);
+    -webkit-transform: scale(1, 1);
+            transform: scale(1, 1);
+  }
+  75% {
+    -webkit-transform: matrix(1.1, 0, 0, 1.1, 110, -44);
+            transform: matrix(1.1, 0, 0, 1.1, 110, -44);
+  }
+  100% {
+    -webkit-transform: translate(0px, 0px);
+            transform: translate(0px, 0px);
+    -webkit-transform: scale(1, 1);
+            transform: scale(1, 1);
+  }
 }
 
 #new-game {

@@ -164,7 +164,7 @@ function startGame(){
 startGame();
 
 
-var computerMove = function(){
+function computerMove (){
     var random = Math.floor(Math.random()*3) + 1;
     if(random == 1) {
         return 'paper';
@@ -181,7 +181,8 @@ var computerMove = function(){
 function playerMove(name){
     console.log('playermove',name);
     var computerM = computerMove();
-    console.log('computermove',computerMove());
+    console.log('computerMove() początek funkcji player Move - ',computerMove());
+    console.log('computerM - początek funkcji playerMove - ', computerM);
     if ((name === 'rock' && computerM ==='paper')||
         (name === 'paper' && computerM==='scissors')||
         (name === 'scissors' && computerM==='rock')){
@@ -193,7 +194,8 @@ function playerMove(name){
         params.progress.push({'round-nb': params.eachRound, 'computer-move': computerM, 'player-move':name, 'result': computerWon});     
         console.log('twoje punkty', params.humanScore); 
         console.log('punkty komputera', params.computerScore);
-        params.output.innerHTML = 'COMPUTER WON. You played ' + name + ', computer played ' + computerMove();
+        params.output.innerHTML = 'COMPUTER WON. You played ' + name + ', computer played ' + computerM;
+        console.log('computerM ruch kompa po inner html - computer won', computerM);
         endRound(); 
         
     }
@@ -206,12 +208,14 @@ function playerMove(name){
             params.score.innerHTML = params.humanScore + ' - ' + params.computerScore;
             var youWon = 'you won';
             params.progress.push({'round-nb': params.eachRound, 'computer-move': computerM, 'player-move':name, 'result': youWon});   
-            params.output.innerHTML = 'YOU WON. You played ' + name + ', computer played ' + computerMove();
+            params.output.innerHTML = 'YOU WON. You played ' + name + ', computer played ' + computerM;
+            console.log('computerM ruch kompa po inner html - you won', computerM);
             endRound();
             
             }
     else {
-            params.output.innerHTML = 'DRAW. You played ' + name + ', computer played ' + computerMove();
+            params.output.innerHTML = 'DRAW. You played ' + name + ', computer played ' + computerM;
+            console.log('compturerM ruch kompa po inner html - draw', computerM);
             params.eachRound++;
             console.log('nr rundy',params.eachRound);
             var draw = 'draw';
@@ -280,10 +284,11 @@ function endRound(){
             params.gameResult.innerHTML = '<span>GAME OVER  - you won</span>' + '<br>';
             createModalTable();
             params.face.classList.toggle('freddy-smile');
-            console.log(params.face);
+            console.log('end round', params.face);
             for (var i=0; i< params.circleButton.length; i ++) {
             params.circleButton[i].classList.add('circle');
             showModal ();
+            params.eachRound = 0;
             }
         }
     else if (params.computerScore == params.winner){
@@ -293,6 +298,7 @@ function endRound(){
             for (var i=0; i< params.circleButton.length; i ++) {
             params.circleButton[i].classList.add('circle');
             showModal();
+            params.eachRound = 0;
             }
         }
     else {
@@ -307,7 +313,10 @@ console.log(params.game);
 
    params.game.addEventListener('click', function(){
    resetGame();
-   params.face.classList.toggle('freddy');
+   params.face.classList.remove('freddy-smile');
+   params.face.classList.remove('freddy-tears');
+   params.face.classList.add('freddy');
+   console.log('new game', params.face);
    params.question = window.prompt('How many round would you like to play?');
    if (isNaN(params.question)|| params.question.length < 1) {
        params.roundNumber.innerHTML = 'Please, write a number';
@@ -325,9 +334,10 @@ console.log(params.game);
  function resetGame(){
    params.humanScore = 0;
    params.computerScore = 0;
+  //params.eachRound = 0;
    params.score.innerHTML= params.humanScore + ' - ' + params.computerScore;
    params.gameResult.innerHTML= ''; 
-   params.face.classList.add('freddy');
+   //params.face.classList.toggle('freddy');
    console.log('reset freddy', params.face); 
    for (var i=0; i<params.circleButton.length; i ++){
              params.circleButton[i].classList.remove('circle');
